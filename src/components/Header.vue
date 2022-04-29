@@ -7,7 +7,7 @@
         <router-link class="nav-item" tag="li" to="/">
           <a class="nav-link" href="#">Anasayfa</a>
         </router-link>
-     <router-link class="nav-item" tag="li" to="/ChangePassword">
+     <router-link class="nav-item" tag="li" to="/changepassword">
           <a class="nav-link" href="#">Şifre Değiştir</a>
         </router-link>
       </ul>
