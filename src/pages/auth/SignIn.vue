@@ -39,6 +39,12 @@
             >
               {{ isUser ? "Giriş Yap" : "Giriş Yap" }}
             </button>
+            <a href="#" @click.prevent="isUser=!isUser" class="text-secondary">
+                            {{ isUser ? 'Üye değilim' : 'Üyeliğim var'}}
+                        </a>
+             <p class="forgot-password text-right">
+               <router-link to="forgotpassword">Şifremi Unuttum</router-link>
+             </p>
           </div>
         </form>
       </div>
@@ -60,6 +66,7 @@ export default {
     onSubmit() {
       alert(this.user);
     },
+
   },
 
 };
