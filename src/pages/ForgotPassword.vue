@@ -1,37 +1,53 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <h3>Şifremi Unuttum</h3>
-   <div class="form-group">
-       <label>E-mail</label>
-    <input type="email" class="form-control" v-model="email" placeholder="E-mail adresiniz"/>
-  </div>
-  <button type="submit" class="btn btn-primary">Gönder</button>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input
+      @blur="$v.email.$touch()"
+        type="email"
+        class="form-control"
+        :class="{'is-invalid':$v.email.$error}"
+        v-model="email"
+        placeholder="E-mail adresiniz"
+      />
+    <small v-if="!$v.email.required" class="form-text text-danger">Lütfen email adresinizi giriniz.</small>
+    <small v-if="!$v.email.required" class="form-text text-danger">Lütfen geçerli bir email adresi giriniz.</small>
+
+    </div>
+    <button type="submit" class="btn btn-primary" :disabled="$v.$invalid">Gönder</button>
   </form>
 </template>
 
 <script>
 import { required, email } from "vuelidate/lib/validators";
-import axios from "axios"
+import axios from "axios";
 export default {
   name: "forgotpassword",
-  data(){
-      return{
-          email:""
-      }
+  data() {
+    return {
+      email: "",
+    };
   },
-  methods:{
-handleSubmit(){
-         const response = axios.post('forgotpassword',{
-             email:this.email
-         });
-    console.log(response)
-      }
+  methods: {
+    handleSubmit() {
+      const response = axios.post("https://dev-smoothie-api.fintechyazilim.com//User/ChangePassword", {
+        email: this.email,
+      }).then((response)=>{
+        if(response.data.IsSuccess===true){
+          console.log("Başarılı")
+        }
+        else{
+            console.log(error)
+          }
+      })
+    },
   },
-   validations: {
-      email: {
-        required,
-        email,
-      },
-   }
+  validations: {
+    email: {
+      required,
+      email,
+    },
+  },
 };
 </script>
