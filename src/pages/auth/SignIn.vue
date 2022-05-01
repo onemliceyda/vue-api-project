@@ -16,31 +16,31 @@
           <div class="form-group">
             <label>E-posta Adresiniz</label>
             <input
-             @blur="$v.email.$touch()"
+              @blur="$v.user.email.$touch()"
               v-model="user.email"
               type="email"
               class="form-control"
               placeholder="E-posta adresinizi giriniz"
             />
-            <small v-if="!$v.email.required" class="form-text text-danger">
-                Lütfen e-mail adresinizi eksiksiz bir şekilde giriniz.
-              </small>
-              <small v-if="!$v.email.email" class="form-text text-danger">
-                Lütfen geçerli formatta bir e-mail adresi giriniz
-              </small>
+            <small v-if="!$v.user.email.required" class="form-text text-danger">
+              Lütfen e-mail adresinizi eksiksiz bir şekilde giriniz.
+            </small>
+            <small v-if="!$v.user.email.email" class="form-text text-danger">
+              Lütfen geçerli formatta bir e-mail adresi giriniz
+            </small>
           </div>
           <div class="form-group">
             <label>Şifre</label>
             <input
-             @blur="$v.password.$touch()"
+              @blur="$v.user.password.$touch()"
               v-model="user.password"
               type="password"
               class="form-control"
               placeholder="Şifreniz..."
             />
-            <small v-if="!$v.password.required" class="form-text text-danger">
-                Giriş yapmak için şifrenizi eksiksiz bir şekilde girmelisiniz.
-              </small>
+            <small v-if="!$v.user.password.required" class="form-text text-danger">
+              Giriş yapmak için şifrenizi eksiksiz bir şekilde girmelisiniz.
+            </small>
           </div>
           <div class="button-container d-flex flex-column align-items-center">
             <button
@@ -48,16 +48,19 @@
               :class="{ 'btn-success': isUser, 'btn-primary': !isUser }"
               class="btn btn-block mb-2"
               :disabled="$v.$invalid"
-
             >
               {{ isUser ? "Giriş Yap" : "Kayıt Ol" }}
             </button>
-            <a href="#" @click.prevent="isUser=!isUser" class="text-secondary">
-                            {{ isUser ? 'Üye değilim' : 'Üyeliğim var'}}
-                        </a>
-             <p class="forgot-password text-right">
-               <router-link to="forgotpassword">Şifremi Unuttum</router-link>
-             </p>
+            <a
+              href="#"
+              @click.prevent="isUser = !isUser"
+              class="text-secondary"
+            >
+              {{ isUser ? "Üye değilim" : "Üyeliğim var" }}
+            </a>
+            <p class="forgot-password text-right">
+              <router-link to="forgotpassword">Şifremi Unuttum</router-link>
+            </p>
           </div>
         </form>
       </div>
@@ -76,7 +79,8 @@ export default {
       isUser: true,
     };
   },
-    validations: {
+  validations: {
+    user: {
       email: {
         required,
         email,
@@ -85,14 +89,11 @@ export default {
         required,
       },
     },
+  },
   methods: {
     onSubmit() {
-    email: this.email
-    password:this.password
+  //bu kısım da diğerinde olduğu gibi yazılacak->forgot password'a bak 
     },
-  
-
   },
-
 };
 </script>

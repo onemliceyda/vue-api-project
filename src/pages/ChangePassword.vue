@@ -72,11 +72,11 @@ export default {
   methods: {
     handleSubmit() {
       const response = axios.post(
-        "https://dev-smoothie-api.fintechyazilim.com/user/ChangePassword",
+        "https://dev-smoothie-api.fintechyazilim.com/User/ChangePassword",
         {
-          password: this.password,
-          passwordConfirm: this.passwordConfirm,
-          oldpassword: this.oldpassword,
+          Password: this.password,
+          PasswordConfirm: this.passwordConfirm,
+          Oldpassword: this.oldpassword,
           token: this.$route.params.token,
         }
       );
