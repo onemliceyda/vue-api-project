@@ -9,5 +9,10 @@ export default {
     Login(email,password){
         const data={Email:email,Password:password,LoginTypeId:"6057FA54-EEB3-EC11-AC1F-000C29330757"}
         Post.PostData("/api/User/Login", data, "")
+    },
+    CustomerList(id){
+        const data={Id:id}
+        Post.PostData("/api/Customer/GetAll",data,"")
+
     }
 }
