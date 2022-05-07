@@ -15,10 +15,11 @@
             :items="customers"
             :fields="fields"
           >
+            <!-- Müşterinin hesap listesi sayfasına yönlendirecek buton  -->
             <template #cell(Accounts)="row">
               <b-button
                 size="sm"
-                @click="row.toggleDetails"
+                @click="$router.push('/account/' + row.item.CustomerId)"
                 class="mr-2"
                 variant="primary"
               >
