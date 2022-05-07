@@ -16,3 +16,4 @@ export default {
         return axios.post('/api/v1/FinTech/Execute', formData, configuration);
     }
 }
+

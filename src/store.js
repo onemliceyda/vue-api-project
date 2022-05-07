@@ -20,15 +20,7 @@ const store=new Vuex.Store({
         },
         logout({commit,dispatch,state}){
 
-        }
-    },
-    getters:{
-    //çıkış yap sadece girdiğimizde ortaya çıkması için yapıcaz
-    
-
-    },
-
-
-
-})
+        },
+    }}
+)
 export default store

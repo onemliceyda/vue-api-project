@@ -38,7 +38,10 @@
               class="form-control"
               placeholder="Şifreniz..."
             />
-            <small v-if="!$v.user.password.required" class="form-text text-danger">
+            <small
+              v-if="!$v.user.password.required"
+              class="form-text text-danger"
+            >
               Giriş yapmak için şifrenizi eksiksiz bir şekilde girmelisiniz.
             </small>
           </div>
@@ -69,6 +72,7 @@
 </template>
 <script>
 import { required, email } from "vuelidate/lib/validators";
+import AuthService from '../../services/AuthService';
 export default {
   data() {
     return {
@@ -92,8 +96,20 @@ export default {
   },
   methods: {
     onSubmit() {
-  //bu kısım da diğerinde olduğu gibi yazılacak->forgot password'a bak 
-    },
-  },
-};
+      AuthService.Login(this.email)
+        .then((response) => {
+          if (response.data.IsSuccess == true || response.data.IsSuccess == 1) {
+            //bu login olsaydı dönen token,kullanıcı bilgisi vs store'a yazılabilirdi.
+            console.log("Giriş sağlandı.");
+          } else {
+            console.log(error);
+          }
+          localStorage.setItem("token")
+
+        });
+
+            }
+},
+
+}
 </script>

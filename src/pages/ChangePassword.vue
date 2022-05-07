@@ -98,6 +98,15 @@ export default {
       sameAs: sameAs("password"),
     },
   },
+   methods: {
+      onSubmit() {
+        this.$store.dispatch("passwordChangeAction", {
+          oldpassword: this.oldpassword,
+          password: this.password,
+          repassword: this.repassword,
+        });
+      },
+    },
 };
 </script>
 
