@@ -10,11 +10,11 @@ Vue.use(VueRouter)
 import store from "./store"
 export const router = new VueRouter({
     routes: [
-        { path: "/", component: Homepage },
-        { path: "/account/:customerId", component: CustomerAccountList },
-        { path: "/login", component: SignIn },
-        { path: "/changepassword/:token", component: ChangePassword },
-        { path: "/forgotpassword", component: ForgotPassword },
+        { path: "/", component: Homepage, meta: { isAuth: true } },
+        { path: "/account/:customerId", component: CustomerAccountList, meta: { isAuth: true } },
+        { path: "/login", component: SignIn, meta: { isAuth: false } },
+        { path: "/changepassword/:token", component: ChangePassword, meta: { isAuth: false } },
+        { path: "/forgotpassword", component: ForgotPassword, meta: { isAuth: false } },
         { path: "/*", component: Error404 },
     ],
     mode: "history"
@@ -30,6 +30,20 @@ router.beforeEach((to, from, next) => {
             token: ""
         }
     )
-    next();
+
+    const authCheck = store.state.authUser
+
+    // token bilgisi ile login zorunluluğunun sayfa giriş öncesinde kontrol edilmesi
+    if (to.meta.isAuth == true && authCheck.token != "") {
+        next()
+    } else if (to.meta.isAuth == false && authCheck.token == "") {
+        next()
+    } else if (to.meta.isAuth == true && authCheck.token == "") {
+        next("/login")
+    } else if (to.meta.isAuth == false && authCheck.token != "") {
+        next("/")
+    } else {
+        next()
+    }
 })
 

@@ -12,7 +12,7 @@ const store = new Vuex.Store({
 
     },
     getters: {
-        getAuthUser: state => state.authUser,
+        getAuthUser: state => () => state.authUser,
     },
     mutations: {
         loginMutation(state, authUser) {
