@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/ForgotPassword"
 import Error404 from "./pages/Error404"
 import CustomerAccountList from "./pages/CustomerAccountList"
 Vue.use(VueRouter)
+import store from "./store"
 export const router = new VueRouter({
     routes: [
         { path: "/", component: Homepage },
@@ -18,5 +19,17 @@ export const router = new VueRouter({
     ],
     mode: "history"
 })
-
+router.beforeEach((to, from, next) => {
+    // login bilgisi storage'dan store'a geri yazılır
+    store.commit("loginMutation",
+        JSON.parse(localStorage.getItem("authUser")) ||
+        {
+            email: "",
+            name: "",
+            role: "",
+            token: ""
+        }
+    )
+    next();
+})
 

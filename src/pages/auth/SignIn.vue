@@ -1,14 +1,10 @@
 <template>
   <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-5 p-5">
       <div
-        class="col-md-4 offset-4 card card-primary p-3 border"
-        :class="{ 'border-success': isUser, 'border-primary': !isUser }"
+        class="col-md-8 offset-2 card card-primary p-3 border border-primary"
       >
-        <h3
-          :class="{ 'text-success': isUser, 'text-primary': !isUser }"
-          class="text-center mb-3 mt-3"
-        >
+        <h3 class="text-primary text-center mb-3 mt-3">
           Giriş Yap
         </h3>
         <hr />
@@ -48,19 +44,12 @@
           <div class="button-container d-flex flex-column align-items-center">
             <button
               type="submit"
-              :class="{ 'btn-success': isUser, 'btn-primary': !isUser }"
-              class="btn btn-block mb-2"
+              class="btn btn-primary btn-block mb-2"
               :disabled="$v.$invalid"
             >
-              {{ isUser ? "Giriş Yap" : "Kayıt Ol" }}
+              Giriş Yap
             </button>
-            <a
-              href="#"
-              @click.prevent="isUser = !isUser"
-              class="text-secondary"
-            >
-              {{ isUser ? "Üye değilim" : "Üyeliğim var" }}
-            </a>
+
             <p class="forgot-password text-right">
               <router-link to="forgotpassword">Şifremi Unuttum</router-link>
             </p>
@@ -72,44 +61,54 @@
 </template>
 <script>
 import { required, email } from "vuelidate/lib/validators";
-import AuthService from '../../services/AuthService';
+import AuthService from "../../services/AuthService";
+import jwt_decode from "jwt-decode";
 export default {
   data() {
     return {
       user: {
         email: null,
-        password: null,
+        password: null
       },
-      isUser: true,
+      isUser: true
     };
   },
   validations: {
     user: {
       email: {
         required,
-        email,
+        email
       },
       password: {
-        required,
-      },
-    },
+        required
+      }
+    }
   },
   methods: {
     onSubmit() {
-      AuthService.Login(this.email)
-        .then((response) => {
+      AuthService.Login(this.user.email, this.user.password)
+        .then(response => {
           if (response.data.IsSuccess == true || response.data.IsSuccess == 1) {
             //bu login olsaydı dönen token,kullanıcı bilgisi vs store'a yazılabilirdi.
-            console.log("Giriş sağlandı.");
+            let responseDecodedToken = jwt_decode(
+              response.data.Result.AccessToken
+            );
+            this.$store.commit("loginMutation", {
+              email: responseDecodedToken.email,
+              name: responseDecodedToken.name,
+              role: responseDecodedToken.role,
+              token: response.data.Result.AccessToken
+            });
+            this.$router.push("/");
           } else {
-            console.log(error);
+            console.log(response.data.Result);
           }
-          localStorage.setItem("token")
-
+          localStorage.setItem("token");
+        })
+        .catch(error => {
+          console.log(error);
         });
-
-            }
-},
-
-}
+    }
+  }
+};
 </script>

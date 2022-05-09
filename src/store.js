@@ -1,26 +1,34 @@
-import Vue from"vue"
-import Vuex from"vuex"
+import Vue from "vue"
+import Vuex from "vuex"
 Vue.use(Vuex)
-const store=new Vuex.Store({
-    state:{
-        token:"",
+const store = new Vuex.Store({
+    state: {
+        authUser: {
+            email: "",
+            name: "",
+            role: "",
+            token: ""
+        },
 
     },
-    mutations:{
-        setToken(state,token){
-            state.token=token
+    getters: {
+        getAuthUser: state => state.authUser,
+    },
+    mutations: {
+        loginMutation(state, authUser) {
+            state.authUser = authUser
+            localStorage.setItem("authUser", JSON.stringify(authUser));
         },
-        clearToken(state){
-            state.token=""
+        logoutMutation(state) {
+            state.authUser = {
+                email: "",
+                name: "",
+                role: "",
+                token: ""
+            };
+            localStorage.removeItem("authUser");
         }
-    },
-    actions:{
-        login({commit,dispatch,state},authData){
-
-        },
-        logout({commit,dispatch,state}){
-
-        },
-    }}
+    }
+}
 )
 export default store
