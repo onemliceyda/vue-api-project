@@ -105,6 +105,7 @@ export default {
             this.$router.push("/");
           } else {
             console.log(response.data.Result);
+            alert.loginError()
           }
           localStorage.setItem("token");
         })

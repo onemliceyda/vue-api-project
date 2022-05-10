@@ -60,6 +60,7 @@
 <script>
 import { required, sameAs, minLength } from "vuelidate/lib/validators";
 import axios from "axios";
+import alert from "../alert"
 export default {
   name: "changepassword",
   data() {
@@ -104,7 +105,10 @@ export default {
           oldpassword: this.oldpassword,
           password: this.password,
           repassword: this.repassword,
+          
         });
+         
+
       },
     },
 };

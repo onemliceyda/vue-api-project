@@ -28,6 +28,7 @@
 import { required, email } from "vuelidate/lib/validators";
 import axios from "axios";
 import AuthService from "../services/AuthService"
+import alert from "../alert"
 export default {
   name: "forgotpassword",
   data() {
@@ -42,8 +43,10 @@ export default {
           if (response.data.IsSuccess == true || response.data.IsSuccess == 1) {
             //bu login olsaydı dönen token,kullanıcı bilgisi vs store'a yazılabilirdi.
             console.log("Giriş sağlandı.");
+            alert.forgotPasswordSuccess()
           } else {
             console.log(error);
+            alert.forgotPasswordError()
           }
         });
     },

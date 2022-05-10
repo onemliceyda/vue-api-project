@@ -18,33 +18,6 @@ const loginError = () => {
   });
 };
 
-const registerSuccess = () => {
-  Swal.fire({
-    title: "Kayıt İşlemi Başarılı",
-    text:
-      "Üye kayıt işlemini başarılı bir şekilde tamamladınız. Mail adresinize gelen aktivasyon mailini kontrol ediniz.",
-    icon: "success",
-    confirmButtonText: "Harika",
-  });
-};
-
-const registerErrorEmail = () => {
-  Swal.fire({
-    title: "Kayıt İşlemi Başarısız",
-    text: "Üye kayıt işlemi başarısız oldu bu email zaten kullanımda.",
-    icon: "error",
-    confirmButtonText: "Pekala",
-  });
-};
-
-const registerError = () => {
-  Swal.fire({
-    title: "Kayıt İşlemi Başarısız",
-    text: "Üye kayıt işlemi başarısız oldu bilgilerinizi gözden geçiriniz.",
-    icon: "error",
-    confirmButtonText: "Pekala",
-  });
-};
 
 const logout = () => {
   Swal.fire({
@@ -111,23 +84,7 @@ const passwordChangeErrorOldPassword = (response) => {
   });
 };
 
-const passwordChangeErrorMinLength = () => {
-  Swal.fire({
-    title: "Şifre Değiştirme İsteği Başarısız",
-    text: "Yeni şifreniz en az 8 karakter uzunluğunda olmalıdır.",
-    icon: "error",
-    confirmButtonText: "Pekala",
-  });
-};
 
-const forgotPasswordChangeSuccess = () => {
-  Swal.fire({
-    title: "Şifreniz Başarıyla Değiştirildi",
-    text: "Şifre değiştirme işleminiz başarılı bir şekilde tamamlandı",
-    icon: "success",
-    confirmButtonText: "Harika",
-  });
-};
 
 const forgotPasswordChangeErrorOldPassword = () => {
   Swal.fire({
@@ -138,23 +95,7 @@ const forgotPasswordChangeErrorOldPassword = () => {
   });
 };
 
-const forgotPasswordChangeErrorMinLength = () => {
-  Swal.fire({
-    title: "Yeni Şifre Değiştirme İsteği Başarısız",
-    text: "Yeni şifreniz 8-200 karakter uzunluğunda olmalıdır",
-    icon: "error",
-    confirmButtonText: "Pekala",
-  });
-};
 
-const forgotPasswordChangeErrorCode = () => {
-  Swal.fire({
-    title: "Yeni Şifre Değiştirme İsteği Başarısız",
-    text: "Doğrulama kodunun geçerliliği sona ermiş",
-    icon: "error",
-    confirmButtonText: "Pekala",
-  });
-};
 
 const forgotPasswordChangeError = () => {
   Swal.fire({
@@ -168,9 +109,6 @@ const forgotPasswordChangeError = () => {
 export default {
   loginSuccess,
   loginError,
-  registerSuccess,
-  registerErrorEmail,
-  registerError,
   logout,
   forgotPasswordSuccess,
   forgotPasswordError,
@@ -178,10 +116,6 @@ export default {
   passwordChangeError,
   passwordChangeErrorPassword,
   passwordChangeErrorOldPassword,
-  passwordChangeErrorMinLength,
-  forgotPasswordChangeSuccess,
   forgotPasswordChangeErrorOldPassword,
-  forgotPasswordChangeErrorMinLength,
-  forgotPasswordChangeErrorCode,
   forgotPasswordChangeError,
 };
