@@ -1,5 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import alert from "./alert"
+import sweetalert2 from "sweetalert2"
 Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
@@ -18,6 +20,7 @@ const store = new Vuex.Store({
         loginMutation(state, authUser) {
             state.authUser = authUser
             localStorage.setItem("authUser", JSON.stringify(authUser));
+
         },
         logoutMutation(state) {
             state.authUser = {
@@ -25,7 +28,9 @@ const store = new Vuex.Store({
                 name: "",
                 role: "",
                 token: ""
+
             };
+            alert.logout()
             localStorage.removeItem("authUser");
         }
     }

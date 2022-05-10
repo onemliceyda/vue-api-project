@@ -63,6 +63,7 @@
 import { required, email } from "vuelidate/lib/validators";
 import AuthService from "../../services/AuthService";
 import jwt_decode from "jwt-decode";
+import alert from "../../alert.js";
 export default {
   data() {
     return {
@@ -99,6 +100,8 @@ export default {
               role: responseDecodedToken.role,
               token: response.data.Result.AccessToken
             });
+            alert.loginSuccess()
+
             this.$router.push("/");
           } else {
             console.log(response.data.Result);
