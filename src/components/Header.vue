@@ -16,7 +16,7 @@
           :class="logoutClass"
         >
           <div class="badge">
-            Hoşgeldin, Ceyda Önemli
+            Hoşgeldin {{this.$store.state.authUser.name}}
           </div>
           <li class="nav-item">
             <a
